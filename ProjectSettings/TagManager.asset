@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Backgraund
+    uniqueID: 4088503603
+    locked: 0
+  - name: Block m
+    uniqueID: 3619102419
+    locked: 0
+  - name: Block f
+    uniqueID: 4273822123
+    locked: 0
+  - name: Block b
+    uniqueID: 872451529
+    locked: 0
+  - name: Obstacle
+    uniqueID: 3351303325
+    locked: 0
