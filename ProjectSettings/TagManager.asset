@@ -3,19 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - only Unit
+  - Unit
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlacementTile
+  - UI2
+  - Units
+  - UnitRange
+  - Enemy
   - 
   - 
   - 
@@ -50,9 +53,15 @@ TagManager:
   - name: Block f
     uniqueID: 4273822123
     locked: 0
+  - name: Enemy
+    uniqueID: 884652283
+    locked: 0
   - name: Block b
     uniqueID: 872451529
     locked: 0
   - name: Obstacle
     uniqueID: 3351303325
+    locked: 0
+  - name: Unit
+    uniqueID: 2705577709
     locked: 0
