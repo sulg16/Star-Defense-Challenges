@@ -165,8 +165,9 @@ public class RelocationManager : MonoBehaviour
                     Vector2Int newCell = MapManager.Instance.GetCellPositionOnGrid(finalPos);
                     MapManager.Instance.UpdateLogicalGrid(newCell.x, newCell.y, 1);
 
-                    int newGridValue = MapManager.Instance.GetLogicalGridValue(newCell.x, newCell.y);
-                    Debug.Log($"[Relocation Success] New Cell ({newCell.x}, {newCell.y}) updated to: {newGridValue}");
+                    //µð¹ö±×
+                    //int newGridValue = MapManager.Instance.GetLogicalGridValue(newCell.x, newCell.y);
+                    //Debug.Log($"[Relocation Success] New Cell ({newCell.x}, {newCell.y}) updated to: {newGridValue}");
                 }
             }
         }

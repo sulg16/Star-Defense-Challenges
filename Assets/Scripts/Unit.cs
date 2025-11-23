@@ -15,7 +15,7 @@ public class Unit : MonoBehaviour
     private GameObject currentTarget;
 
     //머지 승급
-    [SerializeField] private int level = 1;
+    [SerializeField] private int level = 1; //기본
     [SerializeField] private int mergeCost = 50;
     [SerializeField] private Unit upgradedPrefab;
 
@@ -124,27 +124,8 @@ public class Unit : MonoBehaviour
 
     public void OnRelocateButtonClick()
     {
-
         CloseMenu();
-
-        if (RelocationManager.Instance != null)
-        {
-            RelocationManager.Instance.StartRelocation(this.gameObject);
-        }
-
-        if (unitMenuCanvas != null)
-        {
-            unitMenuCanvas.SetActive(false);
-        }
-
-        isMenuOpen = false;
-
-        if (activeMenuUnit == this)
-        {
-            activeMenuUnit = null;
-        }
-
-
+        RelocationManager.Instance?.StartRelocation(gameObject);
     }
 
     public void TryMergeUpgrade()

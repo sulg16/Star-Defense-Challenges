@@ -1,9 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using Unity.Jobs.LowLevel.Unsafe;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -68,6 +62,11 @@ public class ClickManager : MonoBehaviour
         if (Unit.activeMenuUnit != null)
         {
             Unit.activeMenuUnit.CloseMenu();
+        }
+
+        if (PlacementManager.Instance != null)
+        {
+            PlacementManager.Instance.Hide();
         }
     }
 }

@@ -1,9 +1,8 @@
-using System.Collections;
+
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Tilemaps;
+using UnityEngine.EventSystems;
+
 
 public class MapManager : MonoBehaviour
 {
@@ -80,10 +79,44 @@ public class MapManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2Int cellPos = GetCellPositionOnGrid(mouseWorldPos);
-            TryPlaceUnit(cellPos.x, cellPos.y);
+
+            Vector3 cellCenter = GetWorldCenterForCell(cellPos.x, cellPos.y);
+            TryOpenPlacementPopup(cellPos.x, cellPos.y, cellCenter);
         }
+    }
+
+    private void TryOpenPlacementPopup(int x, int y, Vector3 worldPos)
+    {
+        if (x < 0 || x >= MAP_WIDTH || y < 0 || y >= MAP_HEIGHT)
+        {
+            return;
+        }
+
+        if (logicalGrid[y, x] != 0)
+        {
+            return;
+        }
+
+        Vector2Int cell = new Vector2Int(x, y);
+
+        if (!IsPlacementValid(worldPos))
+        {
+            return;
+        }
+
+        if (monsterPath.Contains(cell))
+        {
+            return;
+        }
+
+        PlacementManager.Instance.Show(cell, worldPos);
     }
     public bool IsPlacementValid(Vector3 worldPosition)
     {
@@ -96,7 +129,7 @@ public class MapManager : MonoBehaviour
         }
         if (!hit.collider.CompareTag(placementTag))
         {
-            return true;
+            return false;
         }
 
         Debug.Log(" 배치 가능 ");
@@ -165,9 +198,9 @@ public class MapManager : MonoBehaviour
     }
 
 
+    //디버그
 
-
-
+    /*
     public int GetLogicalGridValue(int x, int y)
     {
         if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT)
@@ -177,37 +210,31 @@ public class MapManager : MonoBehaviour
         return -1;
     }
 
-
-    // 디버그
     private void OnDrawGizmos()
     {
-        // 1. 격자 선의 색상 설정 (눈에 잘 띄는 색으로)
+        // 격자 선의 색상 설정 (눈에 잘 띄는 색으로)
         Gizmos.color = Color.green;
 
-        // 2. 맵의 전체 범위(MAP_WIDTH, MAP_HEIGHT)를 순회합니다.
+        // 맵의 전체 범위(MAP_WIDTH, MAP_HEIGHT)를 순회
         for (int x = 0; x < MAP_WIDTH; x++)
         {
             for (int y = 0; y < MAP_HEIGHT; y++)
             {
-                // 3. 해당 셀의 월드 좌표 중앙점을 계산합니다.
-                //    MapManager 내부에 이미 구현된 함수를 사용합니다.
+                // 해당 셀의 월드 좌표 중앙점을 계산
+                // MapManager 내부에 이미 구현된 함수를 사용
                 Vector3 center = GetWorldCenterForCell(x, y);
 
-                // 4. 격자 셀의 윤곽선을 그립니다.
-                //    cellSize 크기의 상자를 중앙점(center)에 그립니다.
+                // 격자 셀의 윤곽선을 그립니다.
+                // cellSize 크기의 상자를 중앙점(center)에 그림
                 Vector3 size = new Vector3(cellSize, cellSize, 0.1f);
-
-                // 유닛이 배치된 셀은 다른 색으로 표시할 수도 있습니다.
-                // if (logicalGrid[y, x] == 1) Gizmos.color = Color.red; 
 
                 // 윤곽선만 그리기 (상자를 채우지 않음)
                 Gizmos.DrawWireCube(center, size);
 
-                // if (logicalGrid[y, x] == 1) Gizmos.color = Color.green; // 색상 초기화
             }
         }
 
-        // 5. 몬스터 경로 표시 (선택 사항)
+        // 몬스터 경로 표시
         if (monsterPath != null && monsterPath.Count > 1)
         {
             Gizmos.color = Color.yellow;
@@ -219,10 +246,11 @@ public class MapManager : MonoBehaviour
                 Vector3 currentWorldPos = GetWorldCenterForCell(currentCell.x, currentCell.y);
                 Vector3 nextWorldPos = GetWorldCenterForCell(nextCell.x, nextCell.y);
 
-                // 두 셀의 중앙점을 연결하는 선을 그립니다.
+                // 두 셀의 중앙점을 연결하는 선을 그림
                 Gizmos.DrawLine(currentWorldPos, nextWorldPos);
             }
         }
     }
+    */
 }
 

@@ -12,7 +12,7 @@ public class HPbar : MonoBehaviour
         
         if (fillImage == null)
         {
-            GetComponentInChildren<Image>();
+            fillImage = GetComponentInChildren<Image>();
         }
     }
 

@@ -8,8 +8,6 @@ public class Sponer : MonoBehaviour
     [SerializeField] private float WaveInterval = 30f;
     [SerializeField] private int enemiesPerWave = 10;
 
-    private MapManager mapManager;
-
     private int currentWave = 0;
     private const int MAX_WAVES = 3;
     public static int monstersAlive = 0;
@@ -41,12 +39,6 @@ public class Sponer : MonoBehaviour
 
         allWavesFinished = true;
     }
-
-    IEnumerator WaitForAllSpawnsComplete()
-    {
-        yield return new WaitForSeconds(enemiesPerWave * 0.5f);
-    }
-
 
     IEnumerator SpawnEnemiesSquentially()
     {

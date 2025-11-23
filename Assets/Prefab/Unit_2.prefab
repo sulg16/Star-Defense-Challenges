@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC2B9\uAE09"
+  m_text: "\uC2B9\uAE09\n100coin"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02135c389f8bb794685a233f526717d8, type: 2}
   m_sharedMaterial: {fileID: 215295764596806833, guid: 02135c389f8bb794685a233f526717d8, type: 2}
