@@ -15,7 +15,6 @@ public class Sponer : MonoBehaviour
 
     private void Start()
     {
-        mapManager = FindObjectOfType<MapManager>();
         StartCoroutine(ManageWaves());
     }
 
